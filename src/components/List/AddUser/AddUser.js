@@ -81,7 +81,7 @@ function AddUser({ showmodal }) {
             <img src={user.avatar || "img/avatar.png"} alt="" />
             <span>{user.username}</span>
           </div>
-          <button onClick={handleAdd}>Add Useer</button>
+          <button onClick={handleAdd}>Add User</button>
         </div>
       )}
     </div>
