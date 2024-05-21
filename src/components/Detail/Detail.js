@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Detail.css";
 import { auth, db } from "../../library/firebase";
 import { useChatStore } from "../../library/chatStore";
 import { useUserStore } from "../../library/userStore";
-import { arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
+import {
+  arrayRemove,
+  arrayUnion,
+  doc,
+  onSnapshot,
+  updateDoc,
+} from "firebase/firestore";
 
 function Detail() {
+  const [media, setMedia] = useState([]);
   const { chatId, user, isCurrentUserBlocked, isReceiverBlocked, changeBlock } =
     useChatStore();
   const { currentUser } = useUserStore();
@@ -23,6 +30,20 @@ function Detail() {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    // Fetch chat media data
+    const unsubscribe = onSnapshot(doc(db, "chats", chatId), (snapshot) => {
+      const chatData = snapshot.data();
+      if (chatData && chatData.messages) {
+        const media = chatData.messages.filter((message) => message.img);
+        setMedia(media);
+      }
+    });
+
+    return () => unsubscribe();
+  }, [chatId]);
+  console.log(media);
   return (
     <div className="detail">
       <div className="user">
@@ -48,33 +69,17 @@ function Detail() {
             <span>Shared Photos</span>
             <img src="img/arrowDown.png" alt="" />
           </div>
-          <div className="photos">
-            <div className="photoItem">
-              <div className="photoDetail">
-                <img src="https://i.postimg.cc/j5NpL540/images.jpg" alt="" />
-                <span>photo_23/01</span>
+          {media.map((i) => (
+            <div className="photos">
+              <div className="photoItem">
+                <div className="photoDetail">
+                  <img src={i.img} alt="" />
+                  <span>photo_23/01</span>
+                </div>
+                <img src="img/download.png" alt="" className="icon" />
               </div>
-              <img src="img/download.png" alt="" className="icon" />
             </div>
-          </div>
-          <div className="photos">
-            <div className="photoItem">
-              <div className="photoDetail">
-                <img src="https://i.postimg.cc/MKw9WXQJ/download.jpg" alt="" />
-                <span>photo_01/84</span>
-              </div>
-              <img src="img/download.png" alt="" className="icon" />
-            </div>
-          </div>
-          <div className="photos">
-            <div className="photoItem">
-              <div className="photoDetail">
-                <img src="https://i.postimg.cc/8Pb0FqpZ/download.jpg" alt="" />
-                <span>photo_71/01</span>
-              </div>
-              <img src="img/download.png" alt="" className="icon" />
-            </div>
-          </div>
+          ))}
         </div>
         <div className="option">
           <div className="title">
