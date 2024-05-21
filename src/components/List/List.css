@@ -1,6 +1,7 @@
 .list {
   flex: 1;
   display: flex;
+  height: 100%;
   flex-direction: column;
   background-color: rgba(17, 25, 40, 0.944);
   border: 1px solid #dddddd35;

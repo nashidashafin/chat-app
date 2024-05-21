@@ -112,3 +112,22 @@
     }
   }
 }
+@media (width>877px) and (width<997px) {
+  .detail {
+    height: 100%;
+    overflow-y: scroll;
+  }
+}
+
+@media (width>1250px) {
+  .detail {
+    height: 100%;
+    overflow-y: scroll;
+  }
+}
+@media (width>592px) and (width<646px) {
+  .detail {
+    height: 100%;
+    overflow-y: scroll;
+  }
+}
