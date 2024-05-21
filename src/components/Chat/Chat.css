@@ -192,8 +192,13 @@
     }
   }
 }
-@media (width>589px) and (width<646px) {
+@media (width>508px) and (width<647px) {
   .chat {
     margin-top: 0px;
+  }
+}
+@media (width>406px) and (width<500px) {
+  .chat {
+    margin-top: 0;
   }
 }

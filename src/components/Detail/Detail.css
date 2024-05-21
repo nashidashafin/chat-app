@@ -112,6 +112,13 @@
     }
   }
 }
+@media (width<648px) {
+  .photoDetail {
+    span {
+      display: none;
+    }
+  }
+}
 @media (width>877px) and (width<997px) {
   .detail {
     height: 100%;
@@ -125,7 +132,13 @@
     overflow-y: scroll;
   }
 }
-@media (width>589px) and (width<646px) {
+@media (width>508px) and (width<647px) {
+  .detail {
+    height: 100%;
+    overflow-y: scroll;
+  }
+}
+@media (width>406px) and (width<500px) {
   .detail {
     height: 100%;
     overflow-y: scroll;
