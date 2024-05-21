@@ -13,6 +13,7 @@ import {
 
 function Detail() {
   const [media, setMedia] = useState([]);
+  const [chatMedias, setChatMedias] = useState(false);
   const { chatId, user, isCurrentUserBlocked, isReceiverBlocked, changeBlock } =
     useChatStore();
   const { currentUser } = useUserStore();
@@ -67,16 +68,27 @@ function Detail() {
         <div className="option">
           <div className="title">
             <span>Shared Photos</span>
-            <img src="img/arrowDown.png" alt="" />
+            <img
+              src={chatMedias ? "img/arrowDown.png" : "img/arrowUp.png"}
+              alt=""
+              onClick={() => {
+                setChatMedias((prev) => !prev);
+              }}
+            />
           </div>
           {media.map((i) => (
-            <div className="photos">
+            <div
+              className="photos"
+              style={{ display: chatMedias ? "flex" : "none" }}
+            >
               <div className="photoItem">
                 <div className="photoDetail">
                   <img src={i.img} alt="" />
                   <span>photo_23/01</span>
                 </div>
-                <img src="img/download.png" alt="" className="icon" />
+                <a href={i.img} download target="_blank">
+                  <img src="img/download.png" alt="" className="icon" />
+                </a>
               </div>
             </div>
           ))}
