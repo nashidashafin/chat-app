@@ -50,7 +50,7 @@ function Detail() {
       <div className="user">
         <img src={user?.avatar || "img/avatar.png"} alt="" />
         <h2>{user?.username}</h2>
-        <p>Be enough for yourself..😏😎</p>
+        <p>Let's chat...</p>
       </div>
       <div className="info">
         <div className="option">
